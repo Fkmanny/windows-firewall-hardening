@@ -105,3 +105,31 @@ This project demonstrates advanced Windows Defender Firewall configuration to im
 ```powershell
 # Open Windows Defender Firewall with Advanced Security
 wf.msc
+
+# Export current rules for backup
+netsh advfirewall export "C:\firewall_backup.wfw"
+
+# Disable all inbound rules (run in PowerShell Admin)
+Get-NetFirewallRule -Direction Inbound | Disable-NetFirewallRule
+
+# Disable all outbound rules
+Get-NetFirewallRule -Direction Outbound | Disable-NetFirewallRule
+
+# Create inbound ICMP rule
+New-NetFirewallRule -DisplayName "Lab9_ICMP_Firewall_inbound" `
+-Direction Inbound -Protocol ICMPv4 -IcmpType 8 `
+-RemoteAddress 10.119.22.172 -Action Allow -Enabled True
+
+# Create outbound ICMP rule
+New-NetFirewallRule -DisplayName "Lab9_ICMP_Firewall_outbound" `
+-Direction Outbound -Protocol ICMPv4 -IcmpType 0 `
+-RemoteAddress 10.119.22.172 -Action Allow -Enabled True
+
+# Verify rule configuration
+Get-NetFirewallRule -DisplayName "Lab9_ICMP*" | Format-Table DisplayName,Enabled,Direction,Action
+
+# Test connectivity
+Test-NetConnection -ComputerName 10.174.237.122 -InformationLevel Detailed
+
+# Check firewall status
+Get-NetFirewallProfile | Format-Table Name, Enabled
