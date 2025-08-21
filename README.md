@@ -5,6 +5,16 @@ This project demonstrates advanced Windows Defender Firewall configuration to im
 
 ---
 
+## Organizational Application
+
+### Importance to Companies
+This Windows firewall hardening is crucial for implementing network micro-segmentation within sensitive organizational environments. It enforces the principle of least privilege at the host level, preventing lateral movement during security incidents and containing potential breaches.
+
+### Use Case Scenario
+A financial institution applies these rules to segment trading servers from the rest of the network, allowing only specific, authorized monitoring systems to communicate via ICMP while blocking all other traffic, thus protecting critical trading infrastructure.
+
+---
+
 ## Configuration & Screenshots
 
 ### 1. Initial Firewall Status Verification
